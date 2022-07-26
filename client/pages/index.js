@@ -1,3 +1,4 @@
+import ToggleTheme from '../components/ToggleTheme';
 import {Button} from 'antd';
 
 function Home () {
@@ -5,6 +6,9 @@ function Home () {
         <div>
         <h1>Hello World</h1>
         <Button type="primary">Click Me</Button>
+        <br />
+        <br />
+        <ToggleTheme />
         </div>
     );
 }

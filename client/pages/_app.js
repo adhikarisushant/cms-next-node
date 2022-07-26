@@ -1,8 +1,12 @@
-import 'antd/dist/antd.css';
+import { ThemeProvider } from '../context/theme';
+// import 'antd/dist/antd.css';
+import 'antd/dist/antd.dark.css';
 
 function MyApp({Component, pageProps}) {
     return (
-        <Component {...pageProps} />
+        <ThemeProvider>
+            <Component {...pageProps} />
+        </ThemeProvider>
     );
 }
 
