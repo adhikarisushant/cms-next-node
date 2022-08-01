@@ -13,6 +13,7 @@
   "license": "ISC",
   "dependencies": {
     "@ant-design/icons": "^4.7.0",
+    "@react-hook/window-size": "^3.0.7",
     "antd": "^4.22.0",
     "next": "^12.2.3",
     "react": "^18.2.0",

@@ -1,8 +1,14 @@
+import { Layout } from 'antd';
+import AdminLayout from '../../components/layout/AdminLayout';
+
+const { Content, Sider } = Layout;
+
 function Admin () {
     return(
-        <div><h1>Admin Page</h1></div>
- 
-    );
+        <AdminLayout>
+            <h1>AdminLayout Page props</h1>
+        </AdminLayout>
+    )
 }
 
 export default Admin;
