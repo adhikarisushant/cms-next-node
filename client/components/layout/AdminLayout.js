@@ -4,13 +4,13 @@ import AdminNav from '../nav/AdminNav';
 
 const { Content, Sider } = Layout;
 
-function AdminLayout (props) {
+function AdminLayout ({children}) {
     return(
         <Layout>
             <AdminNav />
             <Layout>
-                <Content>
-                    {props.children}
+                <Content style={{ padding: "10px" }}>
+                    {children}
                 </Content>
             </Layout>
         </Layout>

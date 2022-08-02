@@ -7,6 +7,7 @@ function Admin () {
     return(
         <AdminLayout>
             <h1>AdminLayout Page props</h1>
+            <p>...</p>  
         </AdminLayout>
     )
 }

@@ -47,7 +47,7 @@ import {
         >
         <Menu.Item key="1" icon={<SettingOutlined />}>
             <Link href="/admin">
-                <a className={activeName("/active")}>Dashboard</a>
+                <a className={activeName("/admin")}>Dashboard</a>
             </Link>
         </Menu.Item>
 

@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import { Menu } from 'antd'
 import {
+  UserAddOutlined,
+  UserOutlined,
   MailOutlined,
   AppstoreOutlined,
   SettingOutlined,
@@ -19,19 +21,19 @@ const TopNav = () => {
   }
 
   return (
-    <Menu onClick={handleClick} selectedKeys={[current]} mode="horizontal">
+    <Menu onClick={handleClick} selectedKeys={[current]} mode="horizontal" theme="dark">
       <Menu.Item key="mail" icon={<MailOutlined />}>
         <Link href="/">
           <a>CMS</a>
         </Link>
       </Menu.Item>
-      <Menu.Item key="signup" icon={<AppstoreOutlined />}>
+      <Menu.Item key="signup" icon={<UserAddOutlined />}>
         <Link href="/signup">
           SignUp
         </Link>
         
       </Menu.Item>
-      <Menu.Item key="signin" icon={<AppstoreOutlined />}>
+      <Menu.Item key="signin" icon={<UserOutlined />}>
         <Link href="/signin">
             SignIn
         </Link>
