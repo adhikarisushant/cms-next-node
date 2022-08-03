@@ -1,11 +1,51 @@
-import React from 'react';
+import React, { useState, useContext } from 'react';
 import { LockOutlined, UserOutlined, MailOutlined } from '@ant-design/icons';
 import { Button, Checkbox, Form, Input, Col, Row } from 'antd';
 import Link from 'next/link';
+import axios from 'axios';
+import toast from 'react-hot-toast';
+import { AuthContext } from '../context/auth';
+import {useRouter} from 'next/router';
 
 const Signup = () => {
-  const onFinish = (values) => {
-    console.log('Received values of form: ', values);
+    // context
+    const [auth, setAuth] = useState(AuthContext);
+
+    // hook
+    const router = useRouter();
+
+    // state
+    const [loading, setLoading] = useState(false);
+
+  const onFinish = async (values) => {
+    // console.log('Received values of form: ', values);
+    setLoading(true);
+    try {
+        const { data } = await axios.post('http://localhost:8000/api/signup', values);
+
+        if (data?.error) {
+            toast.error(data.error);
+            setLoading(false);
+        } else {    
+            console.log("signup response => ", data )
+            // save in context
+            setAuth(data);
+
+            // save in local storage
+            localStorage.setItem("auth", JSON.stringify(data));
+
+            toast.success('Successfully signed up');
+            setLoading(false);
+
+            // redirect
+            router.push("/admin");
+        }
+
+    } catch (err) {
+        toast.error('Signup failed. Please try again.')
+        console.log(err)
+        setLoading(false);
+    }
   };
 
   return (
@@ -20,6 +60,19 @@ const Signup = () => {
             }}
             onFinish={onFinish}
             >
+                
+                {/* username */}
+            <Form.Item
+                name="name"
+                rules={[
+                {
+                    required: true,
+                    message: 'Please input your name!',
+                },
+                ]}
+            >
+                <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Name" />
+            </Form.Item>
 
                 {/* email */}
             <Form.Item
@@ -56,7 +109,7 @@ const Signup = () => {
                 <br />
                 <br />
             <Form.Item>
-                <Button type="primary" htmlType="submit" className="login-form-button">
+                <Button type="primary" htmlType="submit" className="login-form-button" loading={loading}>
                 Register
                 </Button>
                 <br />

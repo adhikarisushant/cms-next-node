@@ -10,7 +10,7 @@ const sgMail = require("@sendgrid/mail");
 sgMail.setApiKey(process.env.SENDGRID_KEY);
 
 export const signup = async (req, res) => {
-  console.log("HIT SIGNUP");
+  console.log("HIT SIGNUP", req.body);
   try {
     // validation
     const { name, email, password } = req.body;
@@ -44,6 +44,8 @@ export const signup = async (req, res) => {
         email,
         password: hashedPassword,
       }).save();
+
+      // console.log('user saved in signup', user);
 
       // create signed token
       const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, {

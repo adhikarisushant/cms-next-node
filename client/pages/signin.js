@@ -20,18 +20,6 @@ const Signin = () => {
             }}
             onFinish={onFinish}
             >
-                {/* username */}
-            <Form.Item
-                name="name"
-                rules={[
-                {
-                    required: true,
-                    message: 'Please input your name!',
-                },
-                ]}
-            >
-                <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Name" />
-            </Form.Item>
 
                 {/* email */}
             <Form.Item
