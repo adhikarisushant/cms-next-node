@@ -1,11 +1,46 @@
-import React from 'react';
+import React, { useState, useContext } from 'react';
 import { LockOutlined, UserOutlined, MailOutlined } from '@ant-design/icons';
 import { Button, Checkbox, Form, Input, Col, Row } from 'antd';
+import axios from 'axios';
+import toast from 'react-hot-toast';
 import Link from 'next/link';
+import { AuthContext } from '../context/auth';
+import {useRouter} from 'next/router';
 
 const Signin = () => {
-  const onFinish = (values) => {
-    console.log('Received values of form: ', values);
+    // context
+    const [auth, setAuth] = useContext(AuthContext);
+
+    // state
+    const [loading, setLoading] = useState(false);
+
+    // hooks    
+    const router = useRouter();
+    // const [ form ] = Form.useForm();
+
+    const onFinish = async (values) => {
+    // console.log('Received values of form: ', values);
+
+    try {
+        setLoading(true);
+        const {data} = await axios.post('/signin', values);
+        // console.log("signin response => ", data);
+
+        // save user and token to context
+        setAuth(data);
+
+        // save user and token to localstorage
+        localStorage.setItem('auth', JSON.stringify(data));
+        toast.success("Successfully logged in");
+        // redirect user
+        router.push("/");
+        // form.resetFields();
+
+    } catch (err) {
+        console.log('err => ', err);
+        setLoading(false);
+        toast.error("Signin failed. Try again.");
+    }
   };
 
   return (
@@ -13,10 +48,13 @@ const Signin = () => {
         <Col span={8} offset={8}>
             <h1 style={{ paddingTop: '100px' }}>Signin</h1>
             <Form
+            // form={form}
             name="normal_login"
             className="login-form"
             initialValues={{
                 remember: true,
+                // email: "sushant@email.com",
+                // password: "123456", 
             }}
             onFinish={onFinish}
             >

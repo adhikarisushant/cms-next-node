@@ -17,11 +17,16 @@ const Signup = () => {
     // state
     const [loading, setLoading] = useState(false);
 
+    // process.env.NEXT_PUBLIC_API
+
   const onFinish = async (values) => {
     // console.log('Received values of form: ', values);
     setLoading(true);
     try {
-        const { data } = await axios.post('http://localhost:8000/api/signup', values);
+        const { data } = await axios.post(
+            `/signup`, 
+            values
+        );
 
         if (data?.error) {
             toast.error(data.error);
