@@ -24,17 +24,22 @@ const Signin = () => {
     try {
         setLoading(true);
         const {data} = await axios.post('/signin', values);
-        // console.log("signin response => ", data);
+        if(data?.error) {
+            toast.error(data.error);
+            setLoading(false);
+        } else {
+            // console.log("signin response => ", data);
 
-        // save user and token to context
-        setAuth(data);
+            // save user and token to context
+            setAuth(data);
 
-        // save user and token to localstorage
-        localStorage.setItem('auth', JSON.stringify(data));
-        toast.success("Successfully logged in");
-        // redirect user
-        router.push("/");
-        // form.resetFields();
+            // save user and token to localstorage
+            localStorage.setItem('auth', JSON.stringify(data));
+            toast.success("Successfully logged in");
+            // redirect user
+            router.push("/");
+            // form.resetFields();
+        }
 
     } catch (err) {
         console.log('err => ', err);
@@ -93,6 +98,9 @@ const Signin = () => {
                 Login
                 </Button>
                 <br />
+                <Link href="/forgot-password">
+                    <a href="">Forgot Password!</a>
+                </Link> 
                 Or {" "}
                 <Link href="/signup">
                     <a href="">Register now!</a>

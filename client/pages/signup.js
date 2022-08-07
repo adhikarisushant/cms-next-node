@@ -107,10 +107,6 @@ const Signup = () => {
                 placeholder="Password"
                 />
             </Form.Item>
-
-            <Link href="/forgot-password">
-                <a href="">Forgot Password!</a>
-            </Link> 
                 <br />
                 <br />
             <Form.Item>
