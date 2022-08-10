@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { LockOutlined, UserOutlined, MailOutlined } from '@ant-design/icons';
+import { LockOutlined, SyncOutlined, MailOutlined } from '@ant-design/icons';
 import { Button, Checkbox, Form, Input, Col, Row } from 'antd';
 import axios from 'axios';
 import toast from 'react-hot-toast';
@@ -94,7 +94,7 @@ const ForgotPassword = () => {
                     <Form.Item
                         name="resetCode"
                     >
-                        <Input prefix={<MailOutlined className="site-form-item-icon" />} placeholder="Enter Reset Code" />
+                        <Input prefix={<SyncOutlined className="site-form-item-icon" />} placeholder="Enter Reset Code" />
                     </Form.Item>
                         <Form.Item
                             name="password"
