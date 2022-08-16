@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { LockOutlined, UserOutlined, MailOutlined } from '@ant-design/icons';
 import { Button, Checkbox, Form, Input, Col, Row } from 'antd';
 import Link from 'next/link';
@@ -16,6 +16,12 @@ const Signup = () => {
 
     // state
     const [loading, setLoading] = useState(false);
+
+    useEffect(() => {
+        if (auth?.token) {
+            router.push("/");
+        }
+    }, [auth]);
 
     // process.env.NEXT_PUBLIC_API
 

@@ -1,9 +1,10 @@
+require("dotenv").config();
 import User from '../models/user';
 import expressJwt from 'express-jwt';
 
 export const requireSignin = expressJwt({
 
-    secret: process.env.JWT_SECRET,
+    secret: process.env.JWT_SECRET, 
     algorithms: ["HS256"],     
 }); 
 

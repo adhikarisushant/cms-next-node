@@ -1,11 +1,10 @@
-
+require("dotenv").config();
 import User from "../models/user";
 import { hashPassword, comparePassword } from "../helpers/auth";
 import jwt from "jsonwebtoken";
 import nanoid from "nanoid";
 
 // sendgrid
-require("dotenv").config();
 const sgMail = require("@sendgrid/mail");
 sgMail.setApiKey(process.env.SENDGRID_KEY);
 
@@ -158,3 +157,13 @@ export const resetPassword = async (req, res) => {
     console.log(err);
   }
 };
+
+
+export const currentUser = async (req, res) => {
+  try {
+    // const user = await User.findById(req.user._id);
+    res.json({ ok: true })
+  } catch(err) {
+    console.log(err);
+  }
+}

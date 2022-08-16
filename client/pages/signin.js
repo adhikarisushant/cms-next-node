@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { LockOutlined, UserOutlined, MailOutlined } from '@ant-design/icons';
 import { Button, Checkbox, Form, Input, Col, Row } from 'antd';
 import axios from 'axios';
@@ -18,6 +18,12 @@ const Signin = () => {
     const router = useRouter();
     // const [ form ] = Form.useForm();
 
+    useEffect(() => {
+        if (auth?.token) {
+            router.push("/");
+        }
+    }, [auth]);
+
     const onFinish = async (values) => {
     // console.log('Received values of form: ', values);
 
@@ -36,8 +42,16 @@ const Signin = () => {
             // save user and token to localstorage
             localStorage.setItem('auth', JSON.stringify(data));
             toast.success("Successfully logged in");
+            
             // redirect user
-            router.push("/");
+            if(data?.user?.role === "Admin") {
+                router.push("/admin");
+            } else if (data?.user?.role === "Author") {
+                router.push("/author")
+            } else {
+                router.push("/subscriber")
+            }
+
             // form.resetFields();
         }
 
